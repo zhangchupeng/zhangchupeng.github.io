@@ -22,4 +22,35 @@
         <tag>ArduPilot</tag>
       </tags>
   </entry>
+  <entry>
+    <title>在Ubuntu20.04搭建ArduPilot开发环境有感</title>
+    <url>/2025/09/08/Ubuntu20.04%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
+    <content><![CDATA[<h3 id="在Ubuntu20-04搭建ardupilot开发环境有感"><a href="#在Ubuntu20-04搭建ardupilot开发环境有感" class="headerlink" title="在Ubuntu20.04搭建ardupilot开发环境有感"></a>在Ubuntu20.04搭建ardupilot开发环境有感</h3><ol>
+<li>参考<a href="https://blog.csdn.net/qq_38768959/article/details/131133686?csdn_share_tail=%7B%22type%22:%22blog%22,%22rType%22:%22article%22,%22rId%22:%22131133686%22,%22source%22:%22qq_38768959%22%7D">超维</a>的教程进行环境搭建，发现按他文中的顺序操作会出现gazebo9-dev安装不上的问题，知道的大佬可以帮忙解答。</li>
+<li>在刚刚安装好的ubuntu20.04系统中<ul>
+<li>先安装ros1。安装ros1 的过程中会自动安装gazebo9</li>
+<li>再拉取ardupilot的代码，并执行ardupilot&#x2F;Tools&#x2F;environment_install&#x2F;install_xxx_ubuntu.sh文件，这一部分需要用科学上网。</li>
+<li>再拉取ardupilot_gazebo的包，参考超维的教程进行安装。</li>
+</ul>
+</li>
+</ol>
+<h6 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h6><ol>
+<li><p>ardupilot_gazebo的仿真环境会报找不到地图环境：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">需要重新cmake .. -&gt; make -j4 -&gt; make install，并source一下~/.baserc	</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ardupilot仿真运行时，想使用windows的地面站进行操作（UDP）：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">需要在仿真界面执行output add windows中虚拟机的ip地址:port </span><br><span class="line">可使用output查看当前output add的内容	</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现mavros的时候，apm.launch的fcu_url问题：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;arg name=<span class="string">&quot;fcu_url&quot;</span> <span class="keyword">default</span>=<span class="string">&quot;udp://127.0.0.1:14550@14555&quot;</span> /&gt;</span><br></pre></td></tr></table></figure>
+
+<p>udp:&#x2F;&#x2F;ip:port@xxxx 中的port指的是 ardupilot启动后，终端打印的端口信息 ：SIM_VEHICLE: “mavproxy.py” “–out” “127.0.0.1:14550”。</p>
+</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>ArduPilot</tag>
+        <tag>Ubuntu20.04</tag>
+      </tags>
+  </entry>
 </search>
