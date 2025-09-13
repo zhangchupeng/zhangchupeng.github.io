@@ -276,6 +276,183 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/09/14/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6%EF%BC%9A%E7%9B%B4%E6%B5%81%E6%97%A0%E5%88%B7%E7%94%B5%E6%9C%BABLDC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="张楚鹏的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2025/09/14/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6%EF%BC%9A%E7%9B%B4%E6%B5%81%E6%97%A0%E5%88%B7%E7%94%B5%E6%9C%BABLDC/" itemprop="url">电机控制：直流无刷电机BLDC(一)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2025-09-14T02:26:01+08:00">
+                2025-09-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  316
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="电机控制：直流无刷电机BLDC-一"><a href="#电机控制：直流无刷电机BLDC-一" class="headerlink" title="电机控制：直流无刷电机BLDC(一)"></a>电机控制：直流无刷电机BLDC(一)</h3><h4 id="一、BLDC和PMSM的区别"><a href="#一、BLDC和PMSM的区别" class="headerlink" title="一、BLDC和PMSM的区别"></a>一、BLDC和PMSM的区别</h4><p><strong>BLDC和PMSM被称为同步电机。</strong></p>
+<ul>
+<li>BLDC：反向电动势的波形是梯形的，需要使用梯形进行控制。</li>
+<li>PMSM：反向电动势是正弦波，需要使用正弦波才可以对电机进行控制。</li>
+</ul>
+<img src="/2025/09/14/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6%EF%BC%9A%E7%9B%B4%E6%B5%81%E6%97%A0%E5%88%B7%E7%94%B5%E6%9C%BABLDC/image-20250914023510234.png" alt="image-20250914023510234" style="zoom:50%;">
+
+<p>BLDC 在Simulink中的仿真：<strong>查看BLDC的反向电动势的波形是梯形</strong></p>
+<p><img src="/2025/09/14/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6%EF%BC%9A%E7%9B%B4%E6%B5%81%E6%97%A0%E5%88%B7%E7%94%B5%E6%9C%BABLDC/image-20250914023656601.png" alt="image-20250914023656601"></p>
+<h4 id="二、BLDC的六步换相"><a href="#二、BLDC的六步换相" class="headerlink" title="二、BLDC的六步换相"></a>二、BLDC的六步换相</h4><ul>
+<li>六种不同的对齐方式：每一个相邻的转子之间的角度相差60度。则<strong>可使用此规则进行电机的过零点检测并换向。</strong></li>
+</ul>
+<p><img src="/2025/09/14/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6%EF%BC%9A%E7%9B%B4%E6%B5%81%E6%97%A0%E5%88%B7%E7%94%B5%E6%9C%BABLDC/image-20250914023858382.png" alt="image-20250914023858382"></p>
+<ul>
+<li>使用上述的方式将电机驱动起来，则称该控制为<strong>六步幻向</strong>或<strong>梯形控制</strong>。</li>
+</ul>
+<h4 id="三、换相的方式的规律"><a href="#三、换相的方式的规律" class="headerlink" title="三、换相的方式的规律"></a>三、换相的方式的规律</h4><img src="/2025/09/14/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6%EF%BC%9A%E7%9B%B4%E6%B5%81%E6%97%A0%E5%88%B7%E7%94%B5%E6%9C%BABLDC/image-20250914024730158.png" alt="image-20250914024730158" style="zoom:50%;">
+
+<ol>
+<li>转子永远不会和定子对齐，因为<strong>当转子和定子对齐时，此时的电机扭矩为0</strong>。</li>
+<li>当转子和定子处于90度垂直度时候，此时的扭力达到最大。（实际情况<strong>转子和定子达不到90度</strong>，是受梯形控制的影响，<strong>PMSM可实现</strong>）</li>
+</ol>
+<h4 id="四、三相逆变器控制电机的速度"><a href="#四、三相逆变器控制电机的速度" class="headerlink" title="四、三相逆变器控制电机的速度"></a>四、三相逆变器控制电机的速度</h4><ul>
+<li>使用PWM改变MOS的电压，可使得电机的速度改变。</li>
+<li>红色的是N（北极），绿色的是S（南极）</li>
+</ul>
+<p><img src="/2025/09/14/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6%EF%BC%9A%E7%9B%B4%E6%B5%81%E6%97%A0%E5%88%B7%E7%94%B5%E6%9C%BABLDC/image-20250914025040377.png" alt="image-20250914025040377"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://example.com/2025/09/09/QGC%E5%9C%B0%E9%9D%A2%E7%AB%99%E4%BA%8C%E6%AC%A1%E5%BC%80%E5%8F%91%E4%B8%AD%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -636,7 +813,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -649,7 +826,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -700,7 +877,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">291</span>
+    <span title="Site words total count">607</span>
   
 </div>
 
